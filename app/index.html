@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Cover Studio — multi-panel sunset poster maker</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <h1>Vice Cover Studio</h1>
+    <p>Turn your photos into a 9-panel sunset poster cover. Fully offline — photos never leave this device.</p>
+  </div>
+  <div class="steps"><span>1 Pick photos</span><span>2 Arrange panels</span><span>3 Write caption</span><span>4 Export PNG</span></div>
+</header>
+<main class="app">
+  <section class="controls" aria-label="Editor controls">
+    <div class="card">
+      <h2>Layout</h2>
+      <div class="btnrow" id="layoutBtns">
+        <button type="button" data-value="9" class="active">9-panel</button>
+        <button type="button" data-value="4">4-panel</button>
+        <button type="button" data-value="6">6-panel</button>
+        <button type="button" data-value="1">Single hero</button>
+      </div>
+      <p class="hint">Classic 3×3 grid: the centre panel is the hero and carries the caption.</p>
+    </div>
+
+    <div class="card">
+      <h2>Colour grade</h2>
+      <div class="btnrow" id="gradeBtns">
+        <button type="button" data-value="sunset" class="active sw-sunset">Sunset</button>
+        <button type="button" data-value="neon" class="sw-neon">Neon Night</button>
+        <button type="button" data-value="golden" class="sw-golden">Golden Hour</button>
+      </div>
+      <label class="slider">Intensity <span id="intensityVal">85%</span>
+        <input id="intensity" type="range" min="0" max="1" step="0.05" value="0.85">
+      </label>
+      <p class="hint">The grade is painted over every panel — warm highlights, magenta shadows — not a flat tint.</p>
+    </div>
+
+    <div class="card">
+      <h2>Caption</h2>
+      <label>Caption text
+        <input id="caption" type="text" maxlength="24" value="VICE SUNSET">
+      </label>
+      <div class="btnrow" id="styleBtns">
+        <button type="button" data-value="block" class="active">Block white</button>
+        <button type="button" data-value="outline">Outline</button>
+        <button type="button" data-value="neon">Neon glow</button>
+        <button type="button" data-value="banner">Banner</button>
+      </div>
+      <label class="slider">Size <span id="capSizeVal">100%</span>
+        <input id="capSize" type="range" min="0.6" max="1.4" step="0.05" value="1">
+      </label>
+      <div class="btnrow" id="posBtns">
+        <button type="button" data-value="top">Top</button>
+        <button type="button" data-value="center">Centre</button>
+        <button type="button" data-value="bottom" class="active">Bottom</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 id="panelLabel">Panel 5 of 9 — hero</h2>
+      <div class="btnrow wrap" id="photoBtns">
+        <button type="button" data-value="boulevard">Boulevard</button>
+        <button type="button" data-value="pier">Pier</button>
+        <button type="button" data-value="motif:skyline">Skyline</button>
+        <button type="button" data-value="motif:palms">Palms</button>
+        <button type="button" data-value="motif:sunset">Sunset sea</button>
+        <button type="button" data-value="motif:waves">Waves</button>
+      </div>
+      <label class="slider">Zoom <span id="zoomVal">112%</span>
+        <input id="zoom" type="range" min="1" max="3" step="0.05" value="1.12">
+      </label>
+      <label class="slider">Pan left–right
+        <input id="panX" type="range" min="-1" max="1" step="0.05" value="0">
+      </label>
+      <label class="slider">Pan up–down
+        <input id="panY" type="range" min="-1" max="1" step="0.05" value="0">
+      </label>
+      <p class="hint">Click a panel on the cover to select it, then drag it to pan the crop.</p>
+      <label class="file">Add your own photo
+        <input id="photoFile" type="file" accept="image/*">
+      </label>
+    </div>
+
+    <div class="card export">
+      <h2>Export — one click, all sizes</h2>
+      <button id="exportAll" type="button" class="primary">Export all 3 PNGs</button>
+      <div class="btnrow">
+        <button type="button" data-export="0">1080 × 1080</button>
+        <button type="button" data-export="1">1080 × 1350</button>
+        <button type="button" data-export="2">1920 × 1080</button>
+      </div>
+      <p id="status" role="status"></p>
+      <p class="hint">Sample photos are bundled with the app and free to use. Your own photos are read locally and never uploaded.</p>
+    </div>
+  </section>
+
+  <section class="preview" aria-label="Cover preview">
+    <canvas id="cover" width="1080" height="1080"></canvas>
+    <p class="hint">Live preview — what you see is exactly what exports.</p>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
